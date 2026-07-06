@@ -3,13 +3,25 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 
-st.set_page_config(page_title="Digital Gold Token", page_icon="🪙", layout="wide")
+try:
+    with open("DGT_Whitepaper.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
+    
+    st.download_button(
+        label="📄 Download Official $DGT Whitepaper (PDF)",
+        data=PDFbyte,
+        file_name="DGT_Whitepaper.pdf",
+        mime="application/pdf"
+    )
+except FileNotFoundError:
+    st.warning("Whitepaper file not found in repository. Please upload DGT_Whitepaper.pdf")
+
+st.set_page_config(page_title="Digital Gold Token", page_icon="🪙", layout="wide")st.set_page_config(page_title="Digital Gold Token", page_icon="🪙", layout="wide")
 
 st.title("🪙 Digital Gold Token ($DGLD)")
 st.subheader("The Next Generation of Gold-Backed Assets")
 st.markdown("---")
 
-# --- ACTIVE STAKES & CLAIM PORTAL ---
 st.markdown("---")
 st.subheader("📋 Your Active Stakes")
 

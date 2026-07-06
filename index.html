@@ -56,6 +56,22 @@
             background-color: #fff;
             box-shadow: 0 0 15px var(--gold);
         }
+        .btn-whitepaper {
+            background-color: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            padding: 13px 28px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            margin-left: 15px;
+            transition: 0.3s;
+        }
+        .btn-whitepaper:hover {
+            background-color: var(--gold);
+            color: #000;
+        }
         .hero {
             text-align: center;
             padding: 100px 10%;
@@ -73,6 +89,13 @@
             font-size: 18px;
             max-width: 600px;
             margin: 0 auto 30px auto;
+        }
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
         }
         .features {
             display: grid;
@@ -126,17 +149,20 @@
     <header>
         <div class="logo">🪙 Digital Gold</div>
         <nav class="nav-links">
-            <a href="#about">About</a>
             <a href="#features">Features</a>
             <a href="#tokenomics">Tokenomics</a>
-            <a href= href="[https://dill47053-digital-gold-token.streamlit.app](https://dill47053-digital-gold-token.streamlit.app)"class="btn-launch" target="_blank">Launch App</a>
+            <a href="DGT_Whitepaper.pdf" target="_blank">Whitepaper</a>
+            <a href="https://dill47053-digital-gold-token.streamlit.app" class="btn-launch" target="_blank">Launch App</a>
         </nav>
     </header>
 
     <section class="hero">
         <h1>The Next Generation of <br><span>Gold-Backed Assets</span></h1>
         <p>Digital Gold Token ($DGLD) combines the stability of real-world gold with the lightning-fast speed and zero gas fees of the Solana network.</p>
-        <a href="PALITAN_NG_STREAMLIT_LINK" class="btn-launch" style="font-size: 18px; padding: 15px 30px;" target="_blank">Launch Staking Portal</a>
+        <div class="cta-buttons">
+            <a href="https://dill47053-digital-gold-token.streamlit.app" class="btn-launch" style="font-size: 18px; padding: 15px 30px;" target="_blank">Launch Staking Portal</a>
+            <a href="DGT_Whitepaper.pdf" class="btn-whitepaper" download>📄 Whitepaper</a>
+        </div>
     </section>
 
     <section class="features" id="features">

@@ -2,28 +2,56 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import base64
 
-try:
-    with open("DGT_Whitepaper.pdf", "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
-    
-    st.download_button(
-        label="📄 Download Official $DGT Whitepaper (PDF)",
-        data=PDFbyte,
-        file_name="DGT_Whitepaper.pdf",
-        mime="application/pdf"
-    )
-except FileNotFoundError:
-    st.warning("Whitepaper file not found in repository. Please upload DGT_Whitepaper.pdf")
-
+# 1. Page Configuration (Dapat laging una sa code)
 st.set_page_config(page_title="Digital Gold Token", page_icon="🪙", layout="wide")
 
-st.title("🪙 Digital Gold Token ($DGLD)")
-st.subheader("The Next Generation of Gold-Backed Assets")
-st.markdown("---")
+# 2. Sidebar Menu Setup
+st.sidebar.title("🪙 DGLD Navigation")
+st.sidebar.markdown("---")
+page = st.sidebar.radio("Go to:", ["🥩 Staking Dashboard", "📄 Read Whitepaper"])
 
-st.markdown("---")
-st.subheader("📋 Your Active Stakes")
+st.sidebar.markdown("---")
+st.sidebar.info("Securely Powered by Solana Blockchain.")
+
+# ================= PAGE 1: STAKING DASHBOARD =================
+if page == "🥩 Staking Dashboard":
+    st.title("🪙 Digital Gold Token ($DGLD)")
+    st.subheader("The Next Generation of Gold-Backed Assets")
+    st.markdown("---")
+
+    # Download Button Code (Dagdag na option para sa kanila)
+    try:
+        with open("DGT_Whitepaper.pdf", "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
+        st.download_button(
+            label="📥 Download Whitepaper PDF",
+            data=PDFbyte,
+            file_name="DGT_Whitepaper.pdf",
+            mime="application/pdf"
+        )
+    except FileNotFoundError:
+        pass
+
+    st.subheader("📋 Your Active Stakes")
+
+# ================= PAGE 2: READ WHITEPAPER =================
+elif page == "📄 Read Whitepaper":
+    st.title("📄 Official $DGT Whitepaper")
+    st.subheader("Read the technical specifications online")
+    st.markdown("---")
+    
+    try:
+        with open("DGT_Whitepaper.pdf", "rb") as f:
+            base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+        
+        # Ito ang magpapakita ng PDF reader live sa screen
+        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="800" type="application/pdf"></iframe>'
+        st.markdown(pdf_display, unsafe_allow_html=True)
+        
+    except FileNotFoundError:
+        st.error("Whitepaper file (DGT_Whitepaper.pdf) not found. Please ensure it is uploaded in the repository.")
 
 # Create two columns for different stake statuses (Locked vs Ready)
 col_locked, col_ready = st.columns(2)

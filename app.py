@@ -36,22 +36,21 @@ if page == "🥩 Staking Dashboard":
 
     st.subheader("📋 Your Active Stakes")
 
-# ================= PAGE 2: READ WHITEPAPER =================
+    # ================= PAGE 2: READ WHITEPAPER =================
 elif page == "📄 Read Whitepaper":
     st.title("📄 Official $DGT Whitepaper")
-    st.subheader("Read the technical specifications online")
+    st.subheader("Open the technical specifications securely")
     st.markdown("---")
     
-    try:
-        with open("DGT_Whitepaper.pdf", "rb") as f:
-            base64_pdf = base64.b64encode(f.read()).decode('utf-8')
-        
-        # Ito ang magpapakita ng PDF reader live sa screen
-        pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="100%" height="800" type="application/pdf"></iframe>'
-        st.markdown(pdf_display, unsafe_allow_html=True)
-        
-    except FileNotFoundError:
-        st.error("Whitepaper file (DGT_Whitepaper.pdf) not found. Please ensure it is uploaded in the repository.")
+    st.info("💡 Chrome security might block embedded PDFs. Click the button below to view the official Whitepaper securely in a new tab:")
+    
+    # Direktang link sa iyong GitHub repository file na pwedeng basahin online
+    whitepaper_url = "https://github.com/dill47053-glitch/digital-gold-token/blob/main/DGT_Whitepaper.pdf"
+    
+    st.link_button("🌐 Open Whitepaper Online", whitepaper_url, use_container_width=True)
+    
+    st.markdown("---")
+    st.caption("You can also download the copy directly from the Staking Dashboard page.")
 
 # Create two columns for different stake statuses (Locked vs Ready)
 col_locked, col_ready = st.columns(2)

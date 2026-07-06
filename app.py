@@ -16,7 +16,7 @@ try:
 except FileNotFoundError:
     st.warning("Whitepaper file not found in repository. Please upload DGT_Whitepaper.pdf")
 
-st.set_page_config(page_title="Digital Gold Token", page_icon="🪙", layout="wide")st.set_page_config(page_title="Digital Gold Token", page_icon="🪙", layout="wide")
+st.set_page_config(page_title="Digital Gold Token", page_icon="🪙", layout="wide")
 
 st.title("🪙 Digital Gold Token ($DGLD)")
 st.subheader("The Next Generation of Gold-Backed Assets")

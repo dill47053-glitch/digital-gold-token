@@ -64,10 +64,57 @@ if page == "🥩 Staking Dashboard":
             if st.button("🎉 Claim Stake & Rewards", key="btn_claim2"):
                 st.success("Successfully claimed 503,164 DGT to your wallet!")
 
-    with col_wallet:
-        st.subheader("Your Wallet Balance")
-        st.title("4,465,000 DGT")
-        st.button("🔗 Connect Web3 Wallet", use_container_width=True)
+    # Native JavaScript para sa Solana Wallet connection sa browser
+        wallet_html = """
+        <div id="wallet-container">
+            <button id="connect-btn" style="
+                background-color: #512da8; 
+                color: white; 
+                padding: 12px 24px; 
+                border: none; 
+                border-radius: 8px; 
+                font-size: 16px; 
+                font-weight: bold; 
+                cursor: pointer;
+                width: 100%;
+                box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            ">🔗 Connect Web3 Wallet</button>
+            <p id="status" style="color: #888; font-family: sans-serif; margin-top: 10px; font-size: 14px;"></p>
+        </div>
+
+        <script>
+        const btn = document.getElementById('connect-btn');
+        const status = document.getElementById('status');
+
+        btn.addEventListener('click', async () => {
+            const isSolanaAvailable = window.solana && (window.solana.isPhantom || window.solana.isSolflare);
+            
+            if (!isSolanaAvailable) {
+                status.innerHTML = "❌ Wallet extension not found. Please install Phantom or Solflare.";
+                status.style.color = "#ff4b4b";
+                return;
+            }
+
+            try {
+                status.innerHTML = "⏳ Connecting...";
+                status.style.color = "#ffaa00";
+                
+                const resp = await window.solana.connect();
+                const pubKey = resp.publicKey.toString();
+                
+                btn.innerHTML = "✅ Wallet Connected";
+                btn.style.backgroundColor = "#00cc66";
+                status.innerHTML = `Connected Account: <b>${pubKey.slice(0,6)}...${pubKey.slice(-4)}</b>`;
+                status.style.color = "#00cc66";
+            } catch (err) {
+                status.innerHTML = "❌ Connection rejected by user.";
+                status.style.color = "#ff4b4b";
+            }
+        });
+        </script>
+        """
+        import streamlit.components.v1 as components
+        components.html(wallet_html, height=120)
         
         st.markdown("---")
         st.subheader("Staking Portal")
